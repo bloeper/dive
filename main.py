@@ -210,8 +210,8 @@ class Edit( QMainWindow ):
 				self.parent.dive.temparature = int( self.ui.ITemperature.displayText() )
 				self.parent.dive.sight = int( self.ui.ISight.value() )
 				self.parent.dive.notes = str( self.ui.INotes.toPlainText() )
-				self.parent.dive.BarIn = int( self.ui.IBarIn.displayText() )
-				self.parent.dive.BarOut = int( self.ui.IBarOut.displayText() )
+				self.parent.dive.barIn = int( self.ui.IBarIn.displayText() )
+				self.parent.dive.barOut = int( self.ui.IBarOut.displayText() )
 			
 				dives.save()
 				QMessageBox.information( self, "Succes", "The dive has succesfully been saved" )
@@ -232,8 +232,8 @@ class Edit( QMainWindow ):
 				self.parent.dive.temparature = int( self.ui.ITemperature.displayText() )
 				self.parent.dive.sight = int( self.ui.ISight.value() )
 				self.parent.dive.notes = str( self.ui.INotes.toPlainText() )
-				self.parent.dive.BarIn = int( self.ui.IBarIn.displayText() )
-				self.parent.dive.BarOut = int( self.ui.IBarOut.displayText() )
+				self.parent.dive.barIn = int( self.ui.IBarIn.displayText() )
+				self.parent.dive.barOut = int( self.ui.IBarOut.displayText() )
 			
 				dives.save()
 				QMessageBox.information( self, "Succes", "The dive has succesfully been saved" )
