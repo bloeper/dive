@@ -455,17 +455,17 @@
   </widget>
   <action name="AddDive">
    <property name="text">
-    <string>Add Dive</string>
+    <string>Add Dive (CTRL+N)</string>
    </property>
   </action>
   <action name="Quit">
    <property name="text">
-    <string>Quit</string>
+    <string>Quit (CTRL+Q)</string>
    </property>
   </action>
   <action name="Stats">
    <property name="text">
-    <string>View Statistics</string>
+    <string>View Statistics (CTRL+S)</string>
    </property>
   </action>
   <action name="About">

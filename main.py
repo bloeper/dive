@@ -24,20 +24,28 @@ class StartQT4( QMainWindow ):
 		dives.load()
 		self.loadDives()
 
-		#add shortcut key
+		#add shortcut keys
 		if hasattr( QKeySequence, "Quit" ):
-			self.quit_shortcut = QShortcut( QKeySequence( QKeySequence.Quit), self )
+			self.quit_shortcut = QShortcut( QKeySequence( QKeySequence.Quit ), self )
 		else:
 			self.quit_shortcut = QShortcut( QKeySequence( "Ctrl+Q" ), self )
-
-		self.new_shortcut = QShortcut( QKeySequence( "Ctrl+N" ), self )
+		if hasattr( QKeySequence, "New" ):
+			self.new_shortcut = QShortcut( QKeySequence( QKeySequence.New ), self )
+		else:
+			self.new_shortcut = QShortcut( QKeySequence( "Crtl+N"), self.add )
+		if hasattr( QKeySequence, "Stats" ):
+			self.stats_shortcut = QShortcut( QKeySequence( QKeySequence.Stats ), self )
+		else:
+			self.stats_shortcut = QShortcut( QKeySequence( "Ctrl+S" ), self )
 
 		#Connect some actions
 		#Quiters
 		QObject.connect( self.ui.Quit, SIGNAL( "activated()" ), qApp, SLOT( 'quit()' ) )
 		QObject.connect( self.quit_shortcut, SIGNAL( "activated()" ), qApp, SLOT( 'quit()' ) )
 		QObject.connect( self.ui.AddDive, SIGNAL( "activated()" ), self.add )
+		QObject.connect( self.new_shortcut, SIGNAL( "activated()"), self.add )
 		QObject.connect( self.ui.Stats, SIGNAL( "activated()" ), self.stats )
+		QObject.connect( self.stats_shortcut, SIGNAL( "activated()" ), self.stats )
 		QObject.connect( self.ui.About, SIGNAL( "activated()" ), self.about )
 		QObject.connect( self.ui.License, SIGNAL( "activated()" ), self.license )
 		QObject.connect( self.ui.ListDives, SIGNAL( "itemClicked( QListWidgetItem* )" ), self.update )

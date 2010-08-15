@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt/main.ui'
 #
-# Created: Sun Aug 15 16:35:58 2010
+# Created: Sun Aug 15 19:32:48 2010
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -179,9 +179,9 @@ class Ui_Logbook(object):
         self.IBarOut.setText(QtGui.QApplication.translate("Logbook", "*RealBarOut*", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("Logbook", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("Logbook", "Help", None, QtGui.QApplication.UnicodeUTF8))
-        self.AddDive.setText(QtGui.QApplication.translate("Logbook", "Add Dive", None, QtGui.QApplication.UnicodeUTF8))
-        self.Quit.setText(QtGui.QApplication.translate("Logbook", "Quit", None, QtGui.QApplication.UnicodeUTF8))
-        self.Stats.setText(QtGui.QApplication.translate("Logbook", "View Statistics", None, QtGui.QApplication.UnicodeUTF8))
+        self.AddDive.setText(QtGui.QApplication.translate("Logbook", "Add Dive (CTRL+N)", None, QtGui.QApplication.UnicodeUTF8))
+        self.Quit.setText(QtGui.QApplication.translate("Logbook", "Quit (CTRL+Q)", None, QtGui.QApplication.UnicodeUTF8))
+        self.Stats.setText(QtGui.QApplication.translate("Logbook", "View Statistics (CTRL+S)", None, QtGui.QApplication.UnicodeUTF8))
         self.About.setText(QtGui.QApplication.translate("Logbook", "About", None, QtGui.QApplication.UnicodeUTF8))
         self.License.setText(QtGui.QApplication.translate("Logbook", "License", None, QtGui.QApplication.UnicodeUTF8))
 
