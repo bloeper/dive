@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt/main.ui'
 #
-# Created: Sun Aug 15 13:14:33 2010
+# Created: Sun Aug 15 16:14:54 2010
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ class Ui_Logbook(object):
         Logbook.setMaximumSize(QtCore.QSize(800, 600))
         Logbook.setBaseSize(QtCore.QSize(200, 200))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/data/programming/dive/img/img/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/img/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Logbook.setWindowIcon(icon)
         self.centralwidget = QtGui.QWidget(Logbook)
         self.centralwidget.setObjectName("centralwidget")
@@ -32,7 +32,7 @@ class Ui_Logbook(object):
         self.logbookImage.setMaximumSize(QtCore.QSize(200, 200))
         self.logbookImage.setSizeIncrement(QtCore.QSize(200, 200))
         self.logbookImage.setBaseSize(QtCore.QSize(200, 200))
-        self.logbookImage.setStyleSheet("background-image: url(:/data/programming/dive/img/img/log.png);")
+        self.logbookImage.setStyleSheet("background-image: url(:/img/log.png);")
         self.logbookImage.setObjectName("logbookImage")
         self.LNumber = QtGui.QLabel(self.centralwidget)
         self.LNumber.setGeometry(QtCore.QRect(410, 10, 91, 18))
