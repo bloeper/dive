@@ -87,7 +87,7 @@
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>320</y>
+     <y>350</y>
      <width>401</width>
      <height>191</height>
     </rect>
@@ -162,7 +162,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>520</y>
+     <y>540</y>
      <width>90</width>
      <height>27</height>
     </rect>
@@ -240,7 +240,7 @@
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>520</y>
+     <y>540</y>
      <width>90</width>
      <height>27</height>
     </rect>
@@ -253,7 +253,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>320</y>
+     <y>350</y>
      <width>171</width>
      <height>18</height>
     </rect>
@@ -360,6 +360,52 @@
     <string>Sight</string>
    </property>
   </widget>
+  <widget class="QLabel" name="LBarIn">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>320</y>
+     <width>62</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Bar In</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="IBarIn">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>320</y>
+     <width>61</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>320</y>
+     <width>62</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Bar Out</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="IBarOut">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>320</y>
+     <width>61</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>INumber</tabstop>
@@ -372,6 +418,8 @@
   <tabstop>ILead</tabstop>
   <tabstop>ISight</tabstop>
   <tabstop>ITemperature</tabstop>
+  <tabstop>IBarIn</tabstop>
+  <tabstop>IBarOut</tabstop>
   <tabstop>INotes</tabstop>
   <tabstop>Edit</tabstop>
   <tabstop>Cancel</tabstop>

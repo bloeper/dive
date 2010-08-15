@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt/main.ui'
 #
-# Created: Sun Aug 15 16:14:54 2010
+# Created: Sun Aug 15 16:35:58 2010
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -80,7 +80,7 @@ class Ui_Logbook(object):
         self.LTemperature.setGeometry(QtCore.QRect(410, 150, 91, 18))
         self.LTemperature.setObjectName("LTemperature")
         self.ITemperature = QtGui.QLabel(self.centralwidget)
-        self.ITemperature.setGeometry(QtCore.QRect(550, 150, 251, 18))
+        self.ITemperature.setGeometry(QtCore.QRect(550, 150, 241, 18))
         self.ITemperature.setObjectName("ITemperature")
         self.LNotes = QtGui.QLabel(self.centralwidget)
         self.LNotes.setGeometry(QtCore.QRect(200, 220, 62, 18))
@@ -98,11 +98,23 @@ class Ui_Logbook(object):
         self.ListDives.setGeometry(QtCore.QRect(0, 0, 191, 581))
         self.ListDives.setObjectName("ListDives")
         self.Delete = QtGui.QPushButton(self.centralwidget)
-        self.Delete.setGeometry(QtCore.QRect(410, 180, 171, 27))
+        self.Delete.setGeometry(QtCore.QRect(410, 210, 171, 27))
         self.Delete.setObjectName("Delete")
         self.Edit = QtGui.QPushButton(self.centralwidget)
-        self.Edit.setGeometry(QtCore.QRect(590, 180, 201, 27))
+        self.Edit.setGeometry(QtCore.QRect(590, 210, 201, 27))
         self.Edit.setObjectName("Edit")
+        self.LBarIn = QtGui.QLabel(self.centralwidget)
+        self.LBarIn.setGeometry(QtCore.QRect(410, 170, 91, 18))
+        self.LBarIn.setObjectName("LBarIn")
+        self.LBarOut = QtGui.QLabel(self.centralwidget)
+        self.LBarOut.setGeometry(QtCore.QRect(410, 190, 71, 18))
+        self.LBarOut.setObjectName("LBarOut")
+        self.IBarIn = QtGui.QLabel(self.centralwidget)
+        self.IBarIn.setGeometry(QtCore.QRect(550, 170, 241, 18))
+        self.IBarIn.setObjectName("IBarIn")
+        self.IBarOut = QtGui.QLabel(self.centralwidget)
+        self.IBarOut.setGeometry(QtCore.QRect(550, 190, 231, 18))
+        self.IBarOut.setObjectName("IBarOut")
         Logbook.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(Logbook)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 25))
@@ -161,6 +173,10 @@ class Ui_Logbook(object):
         self.ITime.setText(QtGui.QApplication.translate("Logbook", "*time*", None, QtGui.QApplication.UnicodeUTF8))
         self.Delete.setText(QtGui.QApplication.translate("Logbook", "Remove this Dive", None, QtGui.QApplication.UnicodeUTF8))
         self.Edit.setText(QtGui.QApplication.translate("Logbook", "Edit this Dive", None, QtGui.QApplication.UnicodeUTF8))
+        self.LBarIn.setText(QtGui.QApplication.translate("Logbook", "Bar In", None, QtGui.QApplication.UnicodeUTF8))
+        self.LBarOut.setText(QtGui.QApplication.translate("Logbook", "Bar Out", None, QtGui.QApplication.UnicodeUTF8))
+        self.IBarIn.setText(QtGui.QApplication.translate("Logbook", "*RealBarIn*", None, QtGui.QApplication.UnicodeUTF8))
+        self.IBarOut.setText(QtGui.QApplication.translate("Logbook", "*RealBarOut*", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("Logbook", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("Logbook", "Help", None, QtGui.QApplication.UnicodeUTF8))
         self.AddDive.setText(QtGui.QApplication.translate("Logbook", "Add Dive", None, QtGui.QApplication.UnicodeUTF8))

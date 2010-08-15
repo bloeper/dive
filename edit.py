@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt/edit.ui'
 #
-# Created: Sun Aug 15 13:04:25 2010
+# Created: Sun Aug 15 16:37:13 2010
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,7 +30,7 @@ class Ui_EditDive(object):
         self.ITemperature.setGeometry(QtCore.QRect(250, 290, 81, 24))
         self.ITemperature.setObjectName("ITemperature")
         self.INotes = QtGui.QTextEdit(EditDive)
-        self.INotes.setGeometry(QtCore.QRect(250, 320, 401, 191))
+        self.INotes.setGeometry(QtCore.QRect(250, 350, 401, 191))
         self.INotes.setObjectName("INotes")
         self.LTime = QtGui.QLabel(EditDive)
         self.LTime.setGeometry(QtCore.QRect(20, 200, 171, 18))
@@ -47,7 +47,7 @@ class Ui_EditDive(object):
         self.LTemperature.setGeometry(QtCore.QRect(20, 290, 171, 18))
         self.LTemperature.setObjectName("LTemperature")
         self.Edit = QtGui.QPushButton(EditDive)
-        self.Edit.setGeometry(QtCore.QRect(20, 520, 90, 27))
+        self.Edit.setGeometry(QtCore.QRect(20, 540, 90, 27))
         self.Edit.setObjectName("Edit")
         self.ITimeIn = QtGui.QTimeEdit(EditDive)
         self.ITimeIn.setGeometry(QtCore.QRect(250, 140, 118, 26))
@@ -66,10 +66,10 @@ class Ui_EditDive(object):
         self.LTimeOut.setGeometry(QtCore.QRect(20, 170, 171, 18))
         self.LTimeOut.setObjectName("LTimeOut")
         self.Cancel = QtGui.QPushButton(EditDive)
-        self.Cancel.setGeometry(QtCore.QRect(130, 520, 90, 27))
+        self.Cancel.setGeometry(QtCore.QRect(130, 540, 90, 27))
         self.Cancel.setObjectName("Cancel")
         self.LNotes = QtGui.QLabel(EditDive)
-        self.LNotes.setGeometry(QtCore.QRect(20, 320, 171, 18))
+        self.LNotes.setGeometry(QtCore.QRect(20, 350, 171, 18))
         self.LNotes.setObjectName("LNotes")
         self.LDepth = QtGui.QLabel(EditDive)
         self.LDepth.setGeometry(QtCore.QRect(20, 110, 171, 18))
@@ -96,6 +96,18 @@ class Ui_EditDive(object):
         self.LSight = QtGui.QLabel(EditDive)
         self.LSight.setGeometry(QtCore.QRect(20, 260, 171, 18))
         self.LSight.setObjectName("LSight")
+        self.LBarIn = QtGui.QLabel(EditDive)
+        self.LBarIn.setGeometry(QtCore.QRect(20, 320, 62, 18))
+        self.LBarIn.setObjectName("LBarIn")
+        self.IBarIn = QtGui.QLineEdit(EditDive)
+        self.IBarIn.setGeometry(QtCore.QRect(70, 320, 61, 24))
+        self.IBarIn.setObjectName("IBarIn")
+        self.label = QtGui.QLabel(EditDive)
+        self.label.setGeometry(QtCore.QRect(160, 320, 62, 18))
+        self.label.setObjectName("label")
+        self.IBarOut = QtGui.QLineEdit(EditDive)
+        self.IBarOut.setGeometry(QtCore.QRect(250, 320, 61, 24))
+        self.IBarOut.setObjectName("IBarOut")
 
         self.retranslateUi(EditDive)
         QtCore.QMetaObject.connectSlotsByName(EditDive)
@@ -108,7 +120,9 @@ class Ui_EditDive(object):
         EditDive.setTabOrder(self.ITime, self.ILead)
         EditDive.setTabOrder(self.ILead, self.ISight)
         EditDive.setTabOrder(self.ISight, self.ITemperature)
-        EditDive.setTabOrder(self.ITemperature, self.INotes)
+        EditDive.setTabOrder(self.ITemperature, self.IBarIn)
+        EditDive.setTabOrder(self.IBarIn, self.IBarOut)
+        EditDive.setTabOrder(self.IBarOut, self.INotes)
         EditDive.setTabOrder(self.INotes, self.Edit)
         EditDive.setTabOrder(self.Edit, self.Cancel)
 
@@ -130,4 +144,6 @@ class Ui_EditDive(object):
         self.LLocation.setText(QtGui.QApplication.translate("EditDive", "Location", None, QtGui.QApplication.UnicodeUTF8))
         self.ITimeOut.setDisplayFormat(QtGui.QApplication.translate("EditDive", "hh:mm", None, QtGui.QApplication.UnicodeUTF8))
         self.LSight.setText(QtGui.QApplication.translate("EditDive", "Sight", None, QtGui.QApplication.UnicodeUTF8))
+        self.LBarIn.setText(QtGui.QApplication.translate("EditDive", "Bar In", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("EditDive", "Bar Out", None, QtGui.QApplication.UnicodeUTF8))
 

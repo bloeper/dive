@@ -52,7 +52,7 @@ class StartQT4( QMainWindow ):
 			self.ui.ListDives.addItem( str( item.number ) + '-' +item.location )
 	
 	def stats( self ):
-		QMessageBox.information( self, "Your Statistics", "You have made a total of " + str( dives.totalDives() ) + " dives!\nYour total dive time is " + str( dives.totalDiveTime() ) + "!\nYour average divetime is " + str( dives.averageTime() ) + " minutes.\nYour maximum depth is " + str( dives.maxDepth() ) + " meters\nYour average depth is " + str( dives.averageDepth() ) + " meters." )
+		QMessageBox.information( self, "Your Statistics", "You have made a total of " + str( dives.totalDives() ) + " dives!\nYour total dive time is " + str( dives.totalDiveTime() ) + "!\nYour average divetime is " + str( dives.averageTime() ) + " minutes.\nYour maximum depth is " + str( dives.maxDepth() ) + " meters\nYour average depth is " + str( dives.averageDepth() ) + " meters.\nYour average air usage is " + str( dives.averageUsage() ) )
 	
 	def about( self ):
 		QMessageBox.information( self, "About", "This program is written by Tom Sleebe\nIt is written in Python with PyQt gui framework.\nThis was a project for the fun of it ;)" )
@@ -88,6 +88,8 @@ class StartQT4( QMainWindow ):
 		self.ui.ITime.setText( str( self.dive.time ) + 'min' )
 		self.ui.INotes.clear()
 		self.ui.INotes.insertPlainText( self.dive.notes )
+		self.ui.IBarIn.setText( str( self.dive.barIn ) )
+		self.ui.IBarOut.setText( str( self.dive.barOut ) )
 
 	def remove( self ):
 		try:
@@ -131,7 +133,7 @@ class Add( QMainWindow ):
 			try:
 				if self.ui.ITime.displayText() == "":
 					self.ui.ITime.setText( "0" )
-				newDive = Dive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.displayText() ), str( self.ui.IDate.dateTime().toString( "dd-MM-yyyy" ) ), str(self.ui.ITimeIn.time().toString( "HH:mm") ) , str( self.ui.ITimeOut.time().toString( "HH:mm") ), int( self.ui.ITime.displayText() ), int( self.ui.ILead.value() ), str( self.ui.ILocation.displayText() ), int( self.ui.ITemperature.displayText() ), int( self.ui.ISight.value() ), str( self.ui.INotes.toPlainText() ) )
+				newDive = Dive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.displayText() ), str( self.ui.IDate.dateTime().toString( "dd-MM-yyyy" ) ), str(self.ui.ITimeIn.time().toString( "HH:mm") ) , str( self.ui.ITimeOut.time().toString( "HH:mm") ), int( self.ui.ITime.displayText() ), int( self.ui.ILead.value() ), str( self.ui.ILocation.displayText() ), int( self.ui.ITemperature.displayText() ), int( self.ui.ISight.value() ), str( self.ui.INotes.toPlainText() ), int( self.ui.IBarIn.displayText() ), int( self.ui.IBarOut.displayText() ) )
 				dives.add( newDive )
 				dives.save()
 				QMessageBox.information( self, "Succes", "The dive has succesfully been added" )
@@ -141,7 +143,7 @@ class Add( QMainWindow ):
 				QMessageBox.critical( self, "Error", "Sorry couldn't add the dive :('" )
 		else:
 			try:
-				newDive = Dive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.displayText() ), str( self.ui.IDate.dateTime().toString( "dd-MM-yyyy" ) ), 0 , 0, int( self.ui.ITime.displayText() ), int( self.ui.ILead.value() ), str( self.ui.ILocation.displayText() ), int( self.ui.ITemperature.displayText() ), int( self.ui.ISight.value() ), str( self.ui.INotes.toPlainText() ) )
+				newDive = Dive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.displayText() ), str( self.ui.IDate.dateTime().toString( "dd-MM-yyyy" ) ), 0 , 0, int( self.ui.ITime.displayText() ), int( self.ui.ILead.value() ), str( self.ui.ILocation.displayText() ), int( self.ui.ITemperature.displayText() ), int( self.ui.ISight.value() ), str( self.ui.INotes.toPlainText() ), int( self.ui.IBarIn.displayText() ), int( self.ui.IBarOut.displayText() ) )
 				dives.add( newDive )
 				dives.save()
 				QMessageBox.information( self, "Succes", "The dive has succesfully been added" )
@@ -184,6 +186,8 @@ class Edit( QMainWindow ):
 			self.ui.ISight.setValue( int( self.parent.dive.sight ) )
 			self.ui.ITemperature.setText( str( self.parent.dive.temparature ) )
 			self.ui.INotes.setText( str( self.parent.dive.notes ) )
+			self.ui.IBarIn.setText( str( self.parent.dive.barIn ) )
+			self.ui.IBarOut.setText( str( self.parent.dive.barOut ) )
 	
 	def edit( self ):
 		if self.ui.INumber.displayText() == "":
@@ -206,6 +210,8 @@ class Edit( QMainWindow ):
 				self.parent.dive.temparature = int( self.ui.ITemperature.displayText() )
 				self.parent.dive.sight = int( self.ui.ISight.value() )
 				self.parent.dive.notes = str( self.ui.INotes.toPlainText() )
+				self.parent.dive.BarIn = int( self.ui.IBarIn.displayText() )
+				self.parent.dive.BarOut = int( self.ui.IBarOut.displayText() )
 			
 				dives.save()
 				QMessageBox.information( self, "Succes", "The dive has succesfully been saved" )
@@ -226,6 +232,8 @@ class Edit( QMainWindow ):
 				self.parent.dive.temparature = int( self.ui.ITemperature.displayText() )
 				self.parent.dive.sight = int( self.ui.ISight.value() )
 				self.parent.dive.notes = str( self.ui.INotes.toPlainText() )
+				self.parent.dive.BarIn = int( self.ui.IBarIn.displayText() )
+				self.parent.dive.BarOut = int( self.ui.IBarOut.displayText() )
 			
 				dives.save()
 				QMessageBox.information( self, "Succes", "The dive has succesfully been saved" )

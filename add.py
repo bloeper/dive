@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qt/add.ui'
 #
-# Created: Sun Aug 15 13:04:19 2010
+# Created: Sun Aug 15 16:37:14 2010
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,7 +48,7 @@ class Ui_AddDive(object):
         self.LTemperature.setGeometry(QtCore.QRect(10, 300, 171, 18))
         self.LTemperature.setObjectName("LTemperature")
         self.LNotes = QtGui.QLabel(AddDive)
-        self.LNotes.setGeometry(QtCore.QRect(10, 330, 171, 18))
+        self.LNotes.setGeometry(QtCore.QRect(10, 360, 171, 18))
         self.LNotes.setObjectName("LNotes")
         self.INumber = QtGui.QLineEdit(AddDive)
         self.INumber.setGeometry(QtCore.QRect(240, 30, 81, 24))
@@ -85,17 +85,29 @@ class Ui_AddDive(object):
         self.ITemperature.setGeometry(QtCore.QRect(240, 300, 81, 24))
         self.ITemperature.setObjectName("ITemperature")
         self.INotes = QtGui.QTextEdit(AddDive)
-        self.INotes.setGeometry(QtCore.QRect(240, 330, 401, 191))
+        self.INotes.setGeometry(QtCore.QRect(240, 360, 401, 191))
         self.INotes.setObjectName("INotes")
         self.Add = QtGui.QPushButton(AddDive)
-        self.Add.setGeometry(QtCore.QRect(10, 530, 90, 27))
+        self.Add.setGeometry(QtCore.QRect(10, 540, 90, 27))
         self.Add.setObjectName("Add")
         self.Cancel = QtGui.QPushButton(AddDive)
-        self.Cancel.setGeometry(QtCore.QRect(120, 530, 90, 27))
+        self.Cancel.setGeometry(QtCore.QRect(120, 540, 90, 27))
         self.Cancel.setObjectName("Cancel")
         self.IDepth = QtGui.QLineEdit(AddDive)
         self.IDepth.setGeometry(QtCore.QRect(240, 120, 81, 24))
         self.IDepth.setObjectName("IDepth")
+        self.LBarIn = QtGui.QLabel(AddDive)
+        self.LBarIn.setGeometry(QtCore.QRect(10, 330, 62, 18))
+        self.LBarIn.setObjectName("LBarIn")
+        self.IBarIn = QtGui.QLineEdit(AddDive)
+        self.IBarIn.setGeometry(QtCore.QRect(60, 330, 61, 24))
+        self.IBarIn.setObjectName("IBarIn")
+        self.IBarOut = QtGui.QLineEdit(AddDive)
+        self.IBarOut.setGeometry(QtCore.QRect(240, 330, 61, 24))
+        self.IBarOut.setObjectName("IBarOut")
+        self.label = QtGui.QLabel(AddDive)
+        self.label.setGeometry(QtCore.QRect(150, 330, 62, 18))
+        self.label.setObjectName("label")
 
         self.retranslateUi(AddDive)
         QtCore.QMetaObject.connectSlotsByName(AddDive)
@@ -108,7 +120,9 @@ class Ui_AddDive(object):
         AddDive.setTabOrder(self.ITime, self.ILead)
         AddDive.setTabOrder(self.ILead, self.ISight)
         AddDive.setTabOrder(self.ISight, self.ITemperature)
-        AddDive.setTabOrder(self.ITemperature, self.INotes)
+        AddDive.setTabOrder(self.ITemperature, self.IBarIn)
+        AddDive.setTabOrder(self.IBarIn, self.IBarOut)
+        AddDive.setTabOrder(self.IBarOut, self.INotes)
         AddDive.setTabOrder(self.INotes, self.Add)
         AddDive.setTabOrder(self.Add, self.Cancel)
 
@@ -130,4 +144,6 @@ class Ui_AddDive(object):
         self.ITimeOut.setDisplayFormat(QtGui.QApplication.translate("AddDive", "hh:mm", None, QtGui.QApplication.UnicodeUTF8))
         self.Add.setText(QtGui.QApplication.translate("AddDive", "Add Dive", None, QtGui.QApplication.UnicodeUTF8))
         self.Cancel.setText(QtGui.QApplication.translate("AddDive", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        self.LBarIn.setText(QtGui.QApplication.translate("AddDive", "Bar In", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("AddDive", "Bar Out", None, QtGui.QApplication.UnicodeUTF8))
 

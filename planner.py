@@ -8,7 +8,7 @@ class Dive:
 	Dive class, this contains all specific data of 1 dive. 
 	So you could read all the information about it back.
 	"""
-	def __init__( self, number = 0, depth = 0, date = 0, tIn = 0, tOut = 0, time = 0, weight = 0, location = '', temparature = 0, sight = 0, notes = '' ):
+	def __init__( self, number = 0, depth = 0, date = 0, tIn = 0, tOut = 0, time = 0, weight = 0, location = '', temparature = 0, sight = 0, notes = '', barIn = 0, barOut = 0 ):
 		self.number = number
 		self.depth = depth
 		self.date = date
@@ -23,6 +23,8 @@ class Dive:
 		self.temparature = temparature
 		self.sight = sight
 		self.notes = notes
+		self.barIn = barIn
+		self.barOut = barOut
 		
 		if self.tIn == 0 and self.tOut == 0:
 			self.time = time
@@ -124,6 +126,18 @@ class Dives( Dive ):
 		
 		average = depth / self.totalDives()
 		return average
+	
+	def averageUsage( self ):
+		used = []
+		for dive in self.dives:
+			usage = dive.barIn - dive.barOut
+			used.append( usage )
+		usedair = 0.0
+		for usage in used:
+			usedair += usage
+		
+		usedair = usedair / len( used )
+		return usedair
 	
 	#For the gui ;)
 	def getList( self ):
