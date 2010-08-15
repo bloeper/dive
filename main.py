@@ -52,7 +52,7 @@ class StartQT4( QMainWindow ):
 			self.ui.ListDives.addItem( str( item.number ) + '-' +item.location )
 	
 	def stats( self ):
-		QMessageBox.information( self, "Your Statistics", "You have made a total of " + str( dives.totalDives() ) + " dives!\nYour total dive time is " + str( dives.totalDiveTime() ) + "!\nYour average divetime is " + str( dives.averageTime() ) + " minutes.\nYour maximum depth is " + str( dives.maxDepth() ) + " meters!\nYour average depth is " + str( dives.averageDepth() ) + " meters.\nYour average air usage is " + str( dives.averageUsage() ) + ' bar/' )
+		QMessageBox.information( self, "Your Statistics", "You have made a total of " + str( dives.totalDives() ) + " dives!\nYour total dive time is " + str( dives.totalDiveTime() ) + "!\nYour average divetime is " + str( dives.averageTime() ) + " minutes.\nYour maximum depth is " + str( dives.maxDepth() ) + " meters!\nYour average depth is " + str( dives.averageDepth() ) + " meters.\nYour average air usage is " + str( dives.averageUsage() ) + ' bar.' )
 	
 	def about( self ):
 		QMessageBox.information( self, "About", "This program is written by Tom Sleebe\nIt is written in Python with PyQt gui framework.\nThis was a project for the fun of it ;)" )
