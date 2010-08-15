@@ -115,6 +115,8 @@ class Add( QMainWindow ):
 		self.ui.setupUi( self )
 		
 		self.ui.IDate.setDateTime( QDateTime.currentDateTime() )
+		#Set Divenumber to next number (isn't required)
+		self.ui.INumber.setText( str( dives.totalDives() + 1 ) )
 		
 		QObject.connect( self.ui.Add, SIGNAL( "clicked()"), self.add )
 		QObject.connect( self.ui.Cancel, SIGNAL( "clicked()"), self.close )
