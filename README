@@ -1,2 +1,4 @@
 You need to add the python files (not the QT and img) in a map called dive.
 Then you can run main.py and the program will be up and running ;)
+
+To run this app you need to have: python >= 2.6 with pyqt library installed and available for your python version
