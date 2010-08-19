@@ -81,9 +81,9 @@ class StartQT4( QMainWindow ):
 		#Global and Extra Information
 		self.ui.INumber.setText( str( self.dive['number'] ) )
 		self.ui.IDate.setText( self.dive['divedate'].split("-")[2]+"-"+self.dive['divedate'].split("-")[1]+"-"+self.dive['divedate'].split("-")[0] )
-		self.ui.ILead.setText( str( self.dive['lead'] ) + " Kg" )
-		self.ui.ISight.setText( str( self.dive['sight'] ) + " Meter" )
-		self.ui.ITemperature.setText( str( self.dive['temperature']) + " " + degree +"C" )
+		self.ui.ILead.setText( str( self.dive['lead'] ) )
+		self.ui.ISight.setText( str( self.dive['sight'] ) )
+		self.ui.ITemperature.setText( str( self.dive['temperature']) )
 		self.ui.IBarIn.setText( str( self.dive['bar_in'] ) )
 		self.ui.IBarOut.setText( str( self.dive['bar_out'] ) )
 		self.ui.IBarUseage.setText( str( db.usage( self.dive['number'] ) ) )

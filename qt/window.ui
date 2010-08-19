@@ -1,324 +1,373 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Logbook</class>
- <widget class="QMainWindow" name="Logbook">
+ <class>Dive</class>
+ <widget class="QMainWindow" name="Dive">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>984</width>
-    <height>606</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>984</width>
-    <height>606</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>Logbook</string>
+   <string>Diving Logbook</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res.qrc">
     <normaloff>:/img/icon.png</normaloff>:/img/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" rowspan="2">
-     <layout class="QHBoxLayout" name="Left">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMinAndMaxSize</enum>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QListWidget" name="ListDives">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>350</width>
+          <width>200</width>
           <height>16777215</height>
          </size>
         </property>
         <property name="baseSize">
          <size>
-          <width>350</width>
+          <width>200</width>
           <height>0</height>
          </size>
         </property>
        </widget>
       </item>
-     </layout>
-    </item>
-    <item row="0" column="1">
-     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QFrame" name="frame">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <widget class="QGraphicsView" name="Planner">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>200</width>
-           <height>200</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="baseSize">
-          <size>
-           <width>200</width>
-           <height>200</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-image: url(:/img/log.png);</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="IDepth">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>90</y>
-           <width>62</width>
-           <height>18</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>*depth*</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="ITime">
-         <property name="geometry">
-          <rect>
-           <x>80</x>
-           <y>130</y>
-           <width>62</width>
-           <height>18</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>*Time*</string>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QFormLayout" name="formLayout">
-        <item row="0" column="0">
-         <widget class="QLabel" name="LNumber">
-          <property name="text">
-           <string>Dive Number</string>
-          </property>
-         </widget>
+       <layout class="QVBoxLayout" name="Right">
+        <item>
+         <layout class="QHBoxLayout" name="GraphTab">
+          <item>
+           <widget class="QFrame" name="GraphFrame">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>200</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QGraphicsView" name="Graph">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>200</width>
+               <height>200</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-image: url(:/img/log.png);</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="IDepth">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>90</y>
+               <width>62</width>
+               <height>18</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>*Depth*</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="ITime">
+             <property name="geometry">
+              <rect>
+               <x>80</x>
+               <y>130</y>
+               <width>62</width>
+               <height>18</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>*Time*</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTabWidget" name="Information">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="Global">
+             <attribute name="title">
+              <string>Global Information</string>
+             </attribute>
+             <widget class="QWidget" name="layoutWidget">
+              <property name="geometry">
+               <rect>
+                <x>-1</x>
+                <y>-1</y>
+                <width>361</width>
+                <height>211</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="Holder">
+               <item row="0" column="0">
+                <widget class="QLabel" name="LNumber">
+                 <property name="text">
+                  <string>Dive Number</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="INumber">
+                 <property name="text">
+                  <string>*Number*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="LDate">
+                 <property name="text">
+                  <string>Dive Date</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="IDate">
+                 <property name="text">
+                  <string>*Date*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="LLead">
+                 <property name="text">
+                  <string>Lead</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="ILead">
+                 <property name="text">
+                  <string>*Lead*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="LSight">
+                 <property name="text">
+                  <string>Sight</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="ISight">
+                 <property name="text">
+                  <string>*sight*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="LTemperature">
+                 <property name="text">
+                  <string>Temperature</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLabel" name="ITemperature">
+                 <property name="text">
+                  <string>*Temperature</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="InDepth">
+             <attribute name="title">
+              <string>Extra Information</string>
+             </attribute>
+             <widget class="QWidget" name="layoutWidget">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>361</width>
+                <height>211</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="Holder_2">
+               <item row="0" column="0">
+                <widget class="QLabel" name="LBarIn">
+                 <property name="text">
+                  <string>Bar In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLabel" name="IBarIn">
+                 <property name="text">
+                  <string>*Bar In*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="LBarOut">
+                 <property name="text">
+                  <string>Bar Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLabel" name="IBarOut">
+                 <property name="text">
+                  <string>*Bar Out*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="LBarUseage">
+                 <property name="text">
+                  <string>Bar Usage</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="IBarUseage">
+                 <property name="text">
+                  <string>*Useage*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="LTimeIn">
+                 <property name="text">
+                  <string>Time In</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QLabel" name="ITimeIn">
+                 <property name="text">
+                  <string>*In*</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="LTimeOut">
+                 <property name="text">
+                  <string>Time Out</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QLabel" name="ITimeOut">
+                 <property name="text">
+                  <string>*out*</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="INumber">
-          <property name="text">
-           <string>*RealNumber*</string>
-          </property>
-         </widget>
+        <item>
+         <layout class="QHBoxLayout" name="Buttons">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Edit">
+            <property name="text">
+             <string>Edit Dive</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="Delete">
+            <property name="text">
+             <string>Delete Dive</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="LDate">
-          <property name="text">
-           <string>Date</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="IDate">
-          <property name="text">
-           <string>*RealDate*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="LLocation">
-          <property name="text">
-           <string>Location</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="ILocation">
-          <property name="text">
-           <string>*RealLocation*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="LTimeIn">
-          <property name="text">
-           <string>Time In</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="ITimeIn">
-          <property name="text">
-           <string>*RealTimeIn*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="LTimeOut">
-          <property name="text">
-           <string>Time Out</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="ITimeOut">
-          <property name="text">
-           <string>*RealTimeOut*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="LSight">
-          <property name="text">
-           <string>Sight</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLabel" name="ISight">
-          <property name="text">
-           <string>*RealSight*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="LLead">
-          <property name="text">
-           <string>Lead</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="ILead">
-          <property name="text">
-           <string>*RealLead*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="LTemperature">
-          <property name="text">
-           <string>Temperature</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QLabel" name="ITemperature">
-          <property name="text">
-           <string>*RealTemperature*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="LBarIn">
-          <property name="text">
-           <string>Bar In</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QLabel" name="IBarIn">
-          <property name="text">
-           <string>*RealBarIn*</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="0">
-         <widget class="QLabel" name="LBarOut">
-          <property name="text">
-           <string>Bar Out</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
-         <widget class="QLabel" name="IBarOut">
-          <property name="text">
-           <string>*RealBarOut*</string>
-          </property>
-         </widget>
+        <item>
+         <widget class="QTextBrowser" name="INotes"/>
         </item>
        </layout>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="1">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <layout class="QHBoxLayout" name="Buttons">
-        <item>
-         <widget class="QPushButton" name="Delete">
-          <property name="text">
-           <string>Delete Dive</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="Edit">
-          <property name="text">
-           <string>Edit Dive</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QTextBrowser" name="INotes"/>
       </item>
      </layout>
     </item>
@@ -329,7 +378,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>984</width>
+     <width>800</width>
      <height>25</height>
     </rect>
    </property>
@@ -347,11 +396,11 @@
      <string>Help</string>
     </property>
     <addaction name="About"/>
-    <addaction name="License"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <action name="AddDive">
    <property name="text">
     <string>Add Dive</string>
@@ -359,7 +408,7 @@
   </action>
   <action name="Stats">
    <property name="text">
-    <string>View Statistics</string>
+    <string>Statistics</string>
    </property>
   </action>
   <action name="Quit">
@@ -370,11 +419,6 @@
   <action name="About">
    <property name="text">
     <string>About</string>
-   </property>
-  </action>
-  <action name="License">
-   <property name="text">
-    <string>License</string>
    </property>
   </action>
  </widget>
