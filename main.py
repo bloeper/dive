@@ -59,7 +59,7 @@ class StartQT4( QMainWindow ):
 		if self.ui.ListDives.count() != 0:
 			self.ui.ListDives.clear()
 		for dive in dvList:
-			self.ui.ListDives.addItem( str( dive['number'] ) + ' -' + dive['location'] )
+			self.ui.ListDives.addItem( str( dive['number'] ) + ' - ' + dive['location'] )
 	
 	def remove( self ):
 		try:
@@ -275,6 +275,7 @@ class Stats( QMainWindow ):
 			self.ui.IMaxDepth.setText( str( db.maxDepth() ) + " meters" )
 			self.ui.IAvgDepth.setText( str( db.averageDepth() ) + " meters" )
 		else:
+			#No dives yet, so set text to default values
 			self.ui.ITotalDives.setText( str( db.totalDives() ) )
 			self.ui.IAvgAir.setText( "0 bar" )
 			self.ui.IAvgTime.setText( "0 min" )

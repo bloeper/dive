@@ -6,17 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>607</height>
+    <width>462</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Add a Dive</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <layout class="QHBoxLayout" name="NumberLay">
+     <layout class="QHBoxLayout" name="horizontalLayout_8">
       <item>
        <widget class="QLabel" name="LNumber">
         <property name="text">
@@ -30,7 +30,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
        <widget class="QLabel" name="LLocation">
         <property name="text">
@@ -39,16 +39,20 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="ILocation"/>
+       <widget class="QLineEdit" name="ILocation">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="DateLay">
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
       <item>
        <widget class="QLabel" name="LDate">
         <property name="text">
-         <string>Dive Date</string>
+         <string>Date</string>
         </property>
        </widget>
       </item>
@@ -65,14 +69,14 @@
       <item>
        <widget class="QLabel" name="LFormatDate">
         <property name="text">
-         <string>(Year-Month-Day)</string>
+         <string>Format: YYYY-MM-DD                          </string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="TimeLay">
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
        <widget class="QLabel" name="LTimeIn">
         <property name="text">
@@ -82,24 +86,8 @@
       </item>
       <item>
        <widget class="QTimeEdit" name="ITimeIn">
-        <property name="maximumTime">
-         <time>
-          <hour>23</hour>
-          <minute>59</minute>
-          <second>59</second>
-         </time>
-        </property>
-        <property name="currentSection">
-         <enum>QDateTimeEdit::HourSection</enum>
-        </property>
         <property name="displayFormat">
-         <string>HH:mm</string>
-        </property>
-        <property name="currentSectionIndex">
-         <number>0</number>
-        </property>
-        <property name="timeSpec">
-         <enum>Qt::LocalTime</enum>
+         <string>hh:mm</string>
         </property>
        </widget>
       </item>
@@ -112,31 +100,39 @@
       </item>
       <item>
        <widget class="QTimeEdit" name="ITimeOut">
-        <property name="maximumTime">
-         <time>
-          <hour>23</hour>
-          <minute>59</minute>
-          <second>59</second>
-         </time>
-        </property>
-        <property name="currentSection">
-         <enum>QDateTimeEdit::HourSection</enum>
-        </property>
         <property name="displayFormat">
-         <string>HH:mm</string>
-        </property>
-        <property name="currentSectionIndex">
-         <number>0</number>
-        </property>
-        <property name="timeSpec">
-         <enum>Qt::LocalTime</enum>
+         <string>hh:mm</string>
         </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="BarLay">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="LTime">
+        <property name="text">
+         <string>Dive Time     </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="ITime"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="LDiveTime">
+        <property name="text">
+         <string>If time/out filled in not needed</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QLabel" name="LBarIn">
         <property name="text">
@@ -147,7 +143,7 @@
       <item>
        <widget class="QSpinBox" name="IBarIn">
         <property name="maximum">
-         <number>300</number>
+         <number>350</number>
         </property>
         <property name="value">
          <number>220</number>
@@ -164,7 +160,7 @@
       <item>
        <widget class="QSpinBox" name="IBarOut">
         <property name="maximum">
-         <number>300</number>
+         <number>350</number>
         </property>
         <property name="value">
          <number>50</number>
@@ -174,42 +170,21 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="TempSightLay">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="Ltemperature">
+       <widget class="QLabel" name="LDepth">
         <property name="text">
-         <string>Temperature</string>
+         <string>Depth</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="ITemperature">
-        <property name="minimum">
-         <number>-99</number>
-        </property>
+       <widget class="QDoubleSpinBox" name="IDepth">
         <property name="value">
-         <number>20</number>
+         <double>10.000000000000000</double>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLabel" name="LSight">
-        <property name="text">
-         <string>Sight</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="ISight">
-        <property name="value">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="LeadLay">
       <item>
        <widget class="QLabel" name="LLead">
         <property name="text">
@@ -227,49 +202,45 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="DepthLay">
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="Ldepth">
+       <widget class="QLabel" name="LTemperature">
         <property name="text">
-         <string>Depth</string>
+         <string>Temperature</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="IDepth">
+       <widget class="QSpinBox" name="ITemperature">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
         <property name="value">
-         <double>10.000000000000000</double>
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="LSight">
+        <property name="text">
+         <string>Sight</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="ISight">
+        <property name="value">
+         <number>5</number>
         </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="DiveTimeLay">
-      <item>
-       <widget class="QLabel" name="LTime">
-        <property name="text">
-         <string>Dive Time</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="ITime"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="LFormatTime">
-        <property name="text">
-         <string>In minutes, When time in/out is filled in not needed</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="Noteslay">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="LNotes">
         <property name="text">
@@ -283,7 +254,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="Buttons">
+     <layout class="QHBoxLayout" name="horizontalLayout_9">
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -300,7 +271,7 @@
       <item>
        <widget class="QPushButton" name="Add">
         <property name="text">
-         <string>Add</string>
+         <string>Add Dive</string>
         </property>
        </widget>
       </item>

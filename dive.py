@@ -1,7 +1,6 @@
 import sqlite3
-import cgi
 from os import path
-from math import trunc, ceil
+from math import trunc
 from datetime import time
 
 class Dive:
@@ -153,7 +152,7 @@ class Dive:
 				raise Exception( 'Dive date is required.' )
 			if time_in > 0 or time_out > 0:
 				self.cursor.execute( """ INSERT INTO dive ( number, depth, divedate, time_in, time_out, time, bar_in, bar_out, lead, temperature, sight, location, notes ) VALUES (
-				"""+str( number )+""", """+str( depth )+""", STRFTIME( '%Y-%m-%d', '"""+str( divedate )+"""'), STRFTIME( '%H:%M', '"""+str( time_in )+"""'), STRFTIME( '%H:%M', '"""+str( time_out )+"""'), round(strftime('%s', '"""+time_out+"""') - strftime('%s', '"""+time_in+"""'))/3600*60, """+str( bar_in )+""", """+str( bar_out )+""", """+str( lead )+""", """+str( temperature )+""", """+str( sight )+""", " """+self.escape(location)+""" ", " """+self.escape(notes)+""" ")""" )
+				"""+str( number )+""", """+str( depth )+""", STRFTIME( '%Y-%m-%d', '"""+str( divedate )+"""'), STRFTIME( '%H:%M', '"""+str( time_in )+"""'), STRFTIME( '%H:%M', '"""+str( time_out )+"""'), round(strftime('%s', '"""+time_out+"""') - strftime('%s', '"""+time_in+"""'))/3600*60, """+str( bar_in )+""", """+str( bar_out )+""", """+str( lead )+""", """+str( temperature )+""", """+str( sight )+""", '"""+self.escaped(location)+"""', " """+self.escaped(notes)+""" ")""" )
 				self.conn.commit()
 				return 0
 			else:
@@ -176,7 +175,3 @@ class Dive:
 	
 	def escaped( self, value ):
 		return value.replace( "'", "''" )
-		
-if __name__ == "__main__":
-	test = Dive()
-	print test.query( "SELECT * FROM dive WHERE number='")
