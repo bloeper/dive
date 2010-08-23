@@ -7,6 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from sys import exit, argv
 from math import ceil, trunc
+import sqlite3
 
 global db
 db = Dive()
@@ -55,11 +56,14 @@ class StartQT4( QMainWindow ):
 		QObject.connect( self.ui.Edit, SIGNAL( "clicked()" ), self.edit )
 	
 	def updateListDives( self ):
-		dvList = db.listDives()
-		if self.ui.ListDives.count() != 0:
-			self.ui.ListDives.clear()
-		for dive in dvList:
-			self.ui.ListDives.addItem( str( dive['number'] ) + ' - ' + dive['location'] )
+		try:
+			dvList = db.listDives()
+			if self.ui.ListDives.count() != 0:
+				self.ui.ListDives.clear()
+			for dive in dvList:
+				self.ui.ListDives.addItem( str( dive['number'] ) + ' - ' + dive['location'] )
+		except sqlite3.Error, e:
+			QMessageBox.critical( self, "Error", str( e ).capitalize() )
 	
 	def remove( self ):
 		try:
@@ -70,33 +74,36 @@ class StartQT4( QMainWindow ):
 			QMessageBox.critical( self, "Error", "Couldn't remove the selected dive." )
 	
 	def updateDiveInfo( self ):
-		# Extract number from number + string configuration and typecast it to a int
-		number = int( self.ui.ListDives.currentItem().text().split( '-' )[0] )
+		try:
+			# Extract number from number + string configuration and typecast it to a int
+			number = int( self.ui.ListDives.currentItem().text().split( '-' )[0] )
 		
-		#Make degree symbol posible ;)
-		degree = unichr(176).encode("latin_1")
+			#Make degree symbol posible ;)
+			degree = unichr(176).encode("latin_1")
 		
-		self.dive = db.fetchDive( number )
+			self.dive = db.fetchDive( number )
 		
-		#Global and Extra Information
-		self.ui.INumber.setText( str( self.dive['number'] ) )
-		self.ui.IDate.setText( self.dive['divedate'].split("-")[2]+"-"+self.dive['divedate'].split("-")[1]+"-"+self.dive['divedate'].split("-")[0] )
-		self.ui.ILead.setText( str( self.dive['lead'] ) + " Kg" )
-		self.ui.ISight.setText( str( self.dive['sight'] ) + " Meter" )
-		self.ui.ITemperature.setText( str( self.dive['temperature']) + " " + degree +"C" )
-		self.ui.IBarIn.setText( str( self.dive['bar_in'] ) )
-		self.ui.IBarOut.setText( str( self.dive['bar_out'] ) )
-		self.ui.IBarUseage.setText( str( db.usage( self.dive['number'] ) ) )
-		self.ui.ITimeIn.setText( str( self.dive['time_in'] ) )
-		self.ui.ITimeOut.setText( str( self.dive['time_out'] ) )
+			#Global and Extra Information
+			self.ui.INumber.setText( str( self.dive['number'] ) )
+			self.ui.IDate.setText( self.dive['divedate'].split("-")[2]+"-"+self.dive['divedate'].split("-")[1]+"-"+self.dive['divedate'].split("-")[0] )
+			self.ui.ILead.setText( str( self.dive['lead'] ) + " Kg" )
+			self.ui.ISight.setText( str( self.dive['sight'] ) + " Meter" )
+			self.ui.ITemperature.setText( str( self.dive['temperature']) + " " + degree +"C" )
+			self.ui.IBarIn.setText( str( self.dive['bar_in'] ) )
+			self.ui.IBarOut.setText( str( self.dive['bar_out'] ) )
+			self.ui.IBarUseage.setText( str( db.usage( self.dive['number'] ) ) )
+			self.ui.ITimeIn.setText( str( self.dive['time_in'] ) )
+			self.ui.ITimeOut.setText( str( self.dive['time_out'] ) )
 		
-		#Graph
-		self.ui.ITime.setText( str( trunc( ceil( self.dive['time'] ) ) ) + "min" )
-		self.ui.IDepth.setText( str( self.dive['depth'] ) + "m" )
-		
-		#Notes
-		self.ui.INotes.clear()
-		self.ui.INotes.insertPlainText( str( self.dive['notes'] ) )
+			#Graph
+			self.ui.ITime.setText( str( trunc( ceil( self.dive['time'] ) ) ) + "min" )
+			self.ui.IDepth.setText( str( self.dive['depth'] ) + "m" )
+			
+			#Notes
+			self.ui.INotes.clear()
+			self.ui.INotes.insertPlainText( str( self.dive['notes'] ) )
+		except sqlite3.Error, e:
+			QMessageBox.critical( self, "Error", str( e ).capitalize() )
 	
 	def add( self ):
 		Add( self )
@@ -119,11 +126,14 @@ class Add( QMainWindow ):
 		self.ui.setupUi( self )
 		
 		self.ui.IDate.setDateTime( QDateTime.currentDateTime() )
-		if db.query( "SELECT MAX( number ) FROM dive").fetchall()[0][0] == None:
-			number = 1
-		else:
-			number = db.query( "SELECT MAX( number ) FROM dive").fetchall()[0][0]+1
-		self.ui.INumber.setText( str( number ) )
+		try:
+			if db.query( "SELECT MAX( number ) FROM dive").fetchall()[0][0] == None:
+				number = 1
+			else:
+				number = db.query( "SELECT MAX( number ) FROM dive").fetchall()[0][0]+1
+			self.ui.INumber.setText( str( number ) )
+		except sqlite3.Error, e:
+			QMessageBox.critical( self, "Error", str( e ).capitalize() )
 		
 		QObject.connect( self.ui.Add, SIGNAL( "clicked()"), self.add )
 		QObject.connect( self.ui.Cancel, SIGNAL( "clicked()"), self.close )
@@ -148,28 +158,25 @@ class Add( QMainWindow ):
 			QMessageBox.critical( self, "Error", "Location is required." )
 		
 		if not error:
-			if self.ui.ITimeIn.time().toString( "HH:mm" ) == "00:00" and self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
-				if db.insertDive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.value() ), str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") ), 0, 0, int( self.ui.ITime.displayText() ), int( self.ui.IBarIn.value() ), int( self.ui.IBarOut.value() ), int( self.ui.ILead.value() ), int( self.ui.ITemperature.value() ), int( self.ui.ISight.value() ), str( self.ui.ILocation.displayText() ), str( self.ui.INotes.toPlainText() ) ) != 0:
-					QMessageBox.critical( self, "Error", "Couldn't add the dive." )
-				else:
+			try:
+				if self.ui.ITimeIn.time().toString( "HH:mm" ) == "00:00" and self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
+					db.insertDive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.value() ), str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") ), 0, 0, int( self.ui.ITime.displayText() ), int( self.ui.IBarIn.value() ), int( self.ui.IBarOut.value() ), int( self.ui.ILead.value() ), int( self.ui.ITemperature.value() ), int( self.ui.ISight.value() ), str( self.ui.ILocation.displayText() ), str( self.ui.INotes.toPlainText() ) )
 					self.parent.updateListDives()
 					QMessageBox.information( self, "Succes", "The dive has succesfully been added" )
 					self.close()
-			else:
-				if self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
-					if db.insertDive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.value() ), str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") ), str( self.ui.ITimeIn.time().toString( "HH:mm") ), '24:00', 0, int( self.ui.IBarIn.value() ), int( self.ui.IBarOut.value() ), int( self.ui.ILead.value() ), int( self.ui.ITemperature.value() ), int( self.ui.ISight.value() ), str( self.ui.ILocation.displayText() ), str( self.ui.INotes.toPlainText() ) ) != 0:
-						QMessageBox.critical( self, "Error", "Couldn't add the dive." )
-					else:
-						self.parent.updateListDives()
-						QMessageBox.information( self, "Succes", "The dive has succesfully been added" )
-						self.close()
 				else:
-					if db.insertDive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.value() ), str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") ), str( self.ui.ITimeIn.time().toString( "HH:mm") ), str( self.ui.ITimeOut.time().toString( "HH:mm") ), 0, int( self.ui.IBarIn.value() ), int( self.ui.IBarOut.value() ), int( self.ui.ILead.value() ), int( self.ui.ITemperature.value() ), int( self.ui.ISight.value() ), str( self.ui.ILocation.displayText() ), str( self.ui.INotes.toPlainText() ) ) != 0:
-						QMessageBox.critical( self, "Error", "Couldn't add the dive." )
-					else:
+					if self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
+						db.insertDive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.value() ), str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") ), str( self.ui.ITimeIn.time().toString( "HH:mm") ), '24:00', 0, int( self.ui.IBarIn.value() ), int( self.ui.IBarOut.value() ), int( self.ui.ILead.value() ), int( self.ui.ITemperature.value() ), int( self.ui.ISight.value() ), str( self.ui.ILocation.displayText() ), str( self.ui.INotes.toPlainText() ) )
 						self.parent.updateListDives()
 						QMessageBox.information( self, "Succes", "The dive has succesfully been added" )
 						self.close()
+					else:
+						db.insertDive( int( self.ui.INumber.displayText() ), float( self.ui.IDepth.value() ), str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") ), str( self.ui.ITimeIn.time().toString( "HH:mm") ), str( self.ui.ITimeOut.time().toString( "HH:mm") ), 0, int( self.ui.IBarIn.value() ), int( self.ui.IBarOut.value() ), int( self.ui.ILead.value() ), int( self.ui.ITemperature.value() ), int( self.ui.ISight.value() ), str( self.ui.ILocation.displayText() ), str( self.ui.INotes.toPlainText() ) )
+						self.parent.updateListDives()
+						QMessageBox.information( self, "Succes", "The dive has succesfully been added" )
+						self.close()
+			except (sqlite3.Error, Exception), e:
+				QMessageBox.critical( self, "Error", str( e ).capitalize() )
 
 class Edit( QMainWindow ):
 	def __init__( self, parent = None ):
@@ -205,6 +212,7 @@ class Edit( QMainWindow ):
 			self.ui.ITimeOut.setTime( QTime( int( self.parent.dive['time_out'].split(":")[0] ), int( self.parent.dive['time_out'].split(":")[1] ), 0 ) )
 		else:
 			self.ui.ITimeOut.setTime( QTime( 0, 0, 0 ) )
+			
 		self.ui.IBarIn.setValue( self.parent.dive['bar_in'] )
 		self.ui.IBarOut.setValue( self.parent.dive['bar_out'] )
 		self.ui.ITemperature.setValue( self.parent.dive['temperature'] )
@@ -234,28 +242,28 @@ class Edit( QMainWindow ):
 			QMessageBox.critical( self, "Error", "Location is required." )
 		
 		if not error:
-			if self.ui.ITimeIn.time().toString( "HH:mm" ) == "00:00" and self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
-				if db.query( """UPDATE dive SET number='"""+str(self.ui.INumber.displayText() )+"""', depth='"""+str( float( self.ui.IDepth.value()) )+"""', divedate='"""+str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") )+"""', time_in='0', time_out='0', time='"""+str( float( self.ui.ITime.displayText() ) )+"""', bar_in='"""+str( self.ui.IBarIn.value() )+"""', bar_out='"""+str( self.ui.IBarOut.value() )+"""', lead='"""+str( self.ui.ILead.value() )+"""', temperature='"""+str( self.ui.ITemperature.value() )+"""', sight ='"""+str( self.ui.ISight.value() )+"""', location='"""+db.escaped( str( self.ui.ILocation.displayText() ) )+"""', notes='"""+db.escaped( str( self.ui.INotes.toPlainText() ) )+"""' WHERE number = """+str( self.parent.dive['number'] ) ) == 0:
-					QMessageBox.critical( self, "Error", "Couldn't edit the dive." )
-				else:
+			try:
+				if self.ui.ITimeIn.time().toString( "HH:mm" ) == "00:00" and self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
+					db.query( """UPDATE dive SET number='"""+str(self.ui.INumber.displayText() )+"""', depth='"""+str( float( self.ui.IDepth.value()) )+"""', divedate='"""+str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") )+"""', time_in='0', time_out='0', time='"""+str( float( self.ui.ITime.displayText() ) )+"""', bar_in='"""+str( self.ui.IBarIn.value() )+"""', bar_out='"""+str( self.ui.IBarOut.value() )+"""', lead='"""+str( self.ui.ILead.value() )+"""', temperature='"""+str( self.ui.ITemperature.value() )+"""', sight ='"""+str( self.ui.ISight.value() )+"""', location='"""+db.escaped( str( self.ui.ILocation.displayText() ) )+"""', notes='"""+db.escaped( str( self.ui.INotes.toPlainText() ) )+"""' WHERE number = """+str( self.parent.dive['number'] ) )
+					
 					self.parent.updateListDives()
 					QMessageBox.information( self, "Succes", "The dive has succesfully been edited" )
 					self.close()
-			else:
-				if self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
-					if db.query( """UPDATE dive SET number='"""+str(self.ui.INumber.displayText() )+"""', depth='"""+str( float( self.ui.IDepth.value()) )+"""', divedate='"""+str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") )+"""', time_in='"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""', time_out='24:00', time=round(strftime('%s', '24:00') - strftime('%s', '"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""'))/3600*60, bar_in='"""+str( self.ui.IBarIn.value() )+"""', bar_out='"""+str( self.ui.IBarOut.value() )+"""', lead='"""+str( self.ui.ILead.value() )+"""', temperature='"""+str( self.ui.ITemperature.value() )+"""', sight ='"""+str( self.ui.ISight.value() )+"""', location='"""+db.escaped( str( self.ui.ILocation.displayText() ) )+"""', notes='"""+db.escaped( str( self.ui.INotes.toPlainText() ) )+"""' WHERE number = """+str( self.parent.dive['number'] ) ) == 0:
-						QMessageBox.critical( self, "Error", "Couldn't edit the dive." )
-					else:
-						self.parent.updateListDives()
-						QMessageBox.information( self, "Succes", "The dive has succesfully been edited" )
-						self.close()
 				else:
-					if db.query( """UPDATE dive SET number='"""+str(self.ui.INumber.displayText() )+"""', depth='"""+str( float( self.ui.IDepth.value()) )+"""', divedate='"""+str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") )+"""', time_in='"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""', time_out='"""+str( self.ui.ITimeOut.time().toString( "HH:mm") )+"""', time=round(strftime('%s', '"""+str( self.ui.ITimeOut.time().toString( "HH:mm") )+"""') - strftime('%s', '"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""'))/3600*60, bar_in='"""+str( self.ui.IBarIn.value() )+"""', bar_out='"""+str( self.ui.IBarOut.value() )+"""', lead='"""+str( self.ui.ILead.value() )+"""', temperature='"""+str( self.ui.ITemperature.value() )+"""', sight ='"""+str( self.ui.ISight.value() )+"""', location='"""+db.escaped( str( self.ui.ILocation.displayText() ) )+"""', notes='"""+db.escaped( str( self.ui.INotes.toPlainText() ) )+"""' WHERE number = """+str( self.parent.dive['number'] ) ) == 0:
-						QMessageBox.critical( self, "Error", "Couldn't edit the dive." )
-					else:
+					if self.ui.ITimeOut.time().toString( "HH:mm" ) == "00:00":
+						db.query( """UPDATE dive SET number='"""+str(self.ui.INumber.displayText() )+"""', depth='"""+str( float( self.ui.IDepth.value()) )+"""', divedate='"""+str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") )+"""', time_in='"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""', time_out='24:00', time=round(strftime('%s', '24:00') - strftime('%s', '"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""'))/3600*60, bar_in='"""+str( self.ui.IBarIn.value() )+"""', bar_out='"""+str( self.ui.IBarOut.value() )+"""', lead='"""+str( self.ui.ILead.value() )+"""', temperature='"""+str( self.ui.ITemperature.value() )+"""', sight ='"""+str( self.ui.ISight.value() )+"""', location='"""+db.escaped( str( self.ui.ILocation.displayText() ) )+"""', notes='"""+db.escaped( str( self.ui.INotes.toPlainText() ) )+"""' WHERE number = """+str( self.parent.dive['number'] ) )
+						
 						self.parent.updateListDives()
 						QMessageBox.information( self, "Succes", "The dive has succesfully been edited" )
 						self.close()
+					else:
+						db.query( """UPDATE dive SET number='"""+str(self.ui.INumber.displayText() )+"""', depth='"""+str( float( self.ui.IDepth.value()) )+"""', divedate='"""+str( self.ui.IDate.dateTime().toString( "yyyy-MM-dd") )+"""', time_in='"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""', time_out='"""+str( self.ui.ITimeOut.time().toString( "HH:mm") )+"""', time=round(strftime('%s', '"""+str( self.ui.ITimeOut.time().toString( "HH:mm") )+"""') - strftime('%s', '"""+str( self.ui.ITimeIn.time().toString( "HH:mm") )+"""'))/3600*60, bar_in='"""+str( self.ui.IBarIn.value() )+"""', bar_out='"""+str( self.ui.IBarOut.value() )+"""', lead='"""+str( self.ui.ILead.value() )+"""', temperature='"""+str( self.ui.ITemperature.value() )+"""', sight ='"""+str( self.ui.ISight.value() )+"""', location='"""+db.escaped( str( self.ui.ILocation.displayText() ) )+"""', notes='"""+db.escaped( str( self.ui.INotes.toPlainText() ) )+"""' WHERE number = """+str( self.parent.dive['number'] ) )
+					
+						self.parent.updateListDives()
+						QMessageBox.information( self, "Succes", "The dive has succesfully been edited" )
+						self.close()
+			except ( sqlite3.Error, ValueError ), e:
+				QMessageBox.critical( self, "Error", str( e ).capitalize() )
 
 class Stats( QMainWindow ):
 	def __init__( self, parent = None ):
@@ -265,24 +273,28 @@ class Stats( QMainWindow ):
 		self.ui = Ui_Stats()
 		self.ui.setupUi( self )
 		
-		if db.totalDives() > 0:
-			#Setup information
-			self.ui.ITotalDives.setText( str( db.totalDives() ) )
-			self.ui.IAvgAir.setText( str( db.averageUsage() ) + " bar" )
-			self.ui.IAvgTime.setText( str( db.averageTime() ) + " min" )
-			self.ui.ITotalTime.setText( str( db.totalTime() ) )
-			self.ui.ITotalLocations.setText( str( db.totalLocations() ) )
-			self.ui.IMaxDepth.setText( str( db.maxDepth() ) + " meters" )
-			self.ui.IAvgDepth.setText( str( db.averageDepth() ) + " meters" )
-		else:
-			#No dives yet, so set text to default values
-			self.ui.ITotalDives.setText( str( db.totalDives() ) )
-			self.ui.IAvgAir.setText( "0 bar" )
-			self.ui.IAvgTime.setText( "0 min" )
-			self.ui.ITotalTime.setText( "00:00" )
-			self.ui.ITotalLocations.setText( "0" )
-			self.ui.IMaxDepth.setText( "0 meters" )
-			self.ui.IAvgDepth.setText( "0 meters" )
+		try:
+		
+			if db.totalDives() > 0:
+				#Setup information
+				self.ui.ITotalDives.setText( str( db.totalDives() ) )
+				self.ui.IAvgAir.setText( str( db.averageUsage() ) + " bar" )
+				self.ui.IAvgTime.setText( str( db.averageTime() ) + " min" )
+				self.ui.ITotalTime.setText( str( db.totalTime() ) )
+				self.ui.ITotalLocations.setText( str( db.totalLocations() ) )
+				self.ui.IMaxDepth.setText( str( db.maxDepth() ) + " meters" )
+				self.ui.IAvgDepth.setText( str( db.averageDepth() ) + " meters" )
+			else:
+				#No dives yet, so set text to default values
+				self.ui.ITotalDives.setText( str( db.totalDives() ) )
+				self.ui.IAvgAir.setText( "0 bar" )
+				self.ui.IAvgTime.setText( "0 min" )
+				self.ui.ITotalTime.setText( "00:00" )
+				self.ui.ITotalLocations.setText( "0" )
+				self.ui.IMaxDepth.setText( "0 meters" )
+				self.ui.IAvgDepth.setText( "0 meters" )
+		except sqlite3.Error, e:
+			QMessageBox.critical( self, "Error", str( e ).capitalize() )
 		
 		QObject.connect( self.ui.Ok, SIGNAL( "clicked()"), self.close )
 		
