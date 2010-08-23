@@ -1,5 +1,5 @@
 You need to add the python files (not the QT and img) in a map called dive.
-Then you can run main.py and the program will be up and running ;)
+Then you can run divelog.py and the program will be up and running ;)
 
 To run this app you need to have: python >= 2.6 with pyqt library installed and available for your python version
 Since the last update you'll need sqlite also.. Although it's in the default package from python 2.5 and up
