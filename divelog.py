@@ -49,6 +49,7 @@ class StartQT4( QMainWindow ):
 		
 		#Misc
 		QObject.connect( self.ui.ListDives, SIGNAL( "itemClicked( QListWidgetItem* )" ), self.updateDiveInfo )
+		QObject.connect( self.ui.ListDives, SIGNAL( "itemSelectionChanged()" ), self.updateDiveInfo )
 		QObject.connect( self.ui.Delete, SIGNAL( "clicked()" ), self.remove )
 		QObject.connect( self.ui.Stats, SIGNAL( "activated()" ), self.stats )
 		QObject.connect( self.stats_shortcut, SIGNAL( "activated()" ), self.stats )
